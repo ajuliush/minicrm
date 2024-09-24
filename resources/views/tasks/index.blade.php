@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Projects') }}
+            {{ __('Tasks') }}
         </h2>
     </x-slot>
 
@@ -12,8 +12,8 @@
                     <div class="overflow-x-auto">
 
                         <div class="flex justify-start mb-4">
-                            <a href="{{ route('projects.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                Create Projects
+                            <a href="{{ route('tasks.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                Create Tasks
                             </a>
                         </div>
 
@@ -24,25 +24,27 @@
                                     <th class="px-4 py-2">Title</th>
                                     <th class="px-4 py-2">Assigned To</th>
                                     <th class="px-4 py-2">Client</th>
+                                    <th class="px-4 py-2">Project</th>
                                     <th class="px-4 py-2">Deadline</th>
                                     <th class="px-4 py-2">Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($projects as $project)
+                                @foreach ($tasks as $task)
                                 <tr>
                                     <td class="border px-4 py-2">{{ $loop->iteration }}</td>
-                                    <td class="border px-4 py-2">{{ $project->title }}</td>
-                                    <td class="border px-4 py-2">{{ $project->user->first_name }}-{{ $project->user->last_name }}</td>
-                                    <td class="border px-4 py-2">{{ $project->client->company_name }}</td>
-                                    <td class="border px-4 py-2">{{ $project->deadline_at }}</td>
-                                    <td class="border px-4 py-2">{{ $project->status }}</td>
+                                    <td class="border px-4 py-2">{{ $task->title }}</td>
+                                    <td class="border px-4 py-2">{{ $task->user->first_name }}-{{ $task->user->last_name }}</td>
+                                    <td class="border px-4 py-2">{{ $task->client->company_name }}</td>
+                                    <td class="border px-4 py-2">{{ $task->project->title }}</td>
+                                    <td class="border px-4 py-2">{{ $task->deadline_at }}</td>
+                                    <td class="border px-4 py-2">{{ $task->status }}</td>
                                     <td class="border px-4 py-2">
-                                        <a href="{{ route('projects.edit', $project) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded">
+                                        <a href="{{ route('tasks.edit', $task) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded">
                                             Edit
                                         </a>
-                                        <form action="{{ route('projects.destroy', $project) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                        <form action="{{ route('tasks.destroy', $task) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this user?');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
@@ -55,7 +57,7 @@
                             </tbody>
                         </table>
 
-                        {{ $projects->links() }}
+                        {{ $tasks->links() }}
                     </div>
                 </div>
             </div>

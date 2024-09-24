@@ -61,7 +61,8 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $project->update($request->all());
+        return redirect()->route('projects.index')->with('success', 'Project updated successfully');
     }
 
     /**
@@ -69,6 +70,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return redirect()->route('projects.index')->with('success', 'Project delete successfully');
     }
 }
