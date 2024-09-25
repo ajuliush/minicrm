@@ -38,6 +38,7 @@
                                         <a href="{{ route('clients.edit', $client) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded">
                                             Edit
                                         </a>
+                                        @can(\App\Enums\PermissionEnum::DELETE_CLIENTS->value)
                                         <form action="{{ route('clients.destroy', $client) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this user?');">
                                             @csrf
                                             @method('DELETE')
@@ -45,6 +46,7 @@
                                                 Delete
                                             </button>
                                         </form>
+                                        @endcan
                                     </td>
                                 </tr>
                                 @endforeach
